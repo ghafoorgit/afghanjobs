@@ -25,6 +25,16 @@
                 <li class="nav-item">
                     <a class="nav-link text-white" href="{{ url('/contact-us') }}">Contact Us</a>
                 </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Access Control
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="{{ url('/users') }}">Users</a></li>
+                        <li><a class="dropdown-item" href="{{ url('/roles') }}">Roles</a></li>
+                        <li><a class="dropdown-item" href="{{ url('/permissions') }}">Permissions</a></li>
+                    </ul>
+                </li>
 
                 @guest
                     <li class="nav-item">
