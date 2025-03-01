@@ -40,12 +40,12 @@ class PermissionController extends Controller
         ]);
 
         $permission->update($request->all());
-        return redirect()->route('users.permissions.index');
+        return redirect()->route('permissions.index');
     }
 
     public function destroy(Permission $permission)
     {
         $permission->delete();
-        return redirect()->route('users.permissions.index');
+        return redirect()->route('permissions.index');
     }
 }
