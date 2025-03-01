@@ -4,18 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Job Posting Website</title>
-    <!-- Bootstrap 5 CDN -->
+
+    <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom Styles -->
-    <style>
-        .navbar-brand {
-            font-weight: bold;
-        }
-        /* Underline nav links on hover */
-        .nav-link:hover {
-            text-decoration: underline;
-        }
-    </style>
+
+    <!-- Select2 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet">
+
+    <!-- Select2 Bootstrap 5 Theme -->
+    <link href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" rel="stylesheet">
+
+
+
 </head>
 <body>
     <x-header />
@@ -25,5 +25,22 @@
 
     <!-- Bootstrap 5 JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- jQuery (Required for Select2) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Select2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+
+    <!-- Initialize Select2 -->
+    <script>
+        $(document).ready(function() {
+            $('.select2').select2({
+                theme: "bootstrap-5", // Use Bootstrap 5 theme
+                placeholder: "Select an option",
+                allowClear: true
+            });
+        });
+    </script>
 </body>
 </html>
