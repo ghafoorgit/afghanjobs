@@ -1,6 +1,9 @@
 <x-layout>
+
+
     <div class="container mt-4 d-flex justify-content-center">
         <div class="card" style="width:40%;">
+            <x-session-message />
             <div class="card-header bg-dark text-white text-center">
                 <h4>Login</h4>
             </div>

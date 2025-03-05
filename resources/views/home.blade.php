@@ -3,7 +3,9 @@
     <div>
         <img src="{{ asset('system_images/homepage_horizontal.webp') }}" alt="Job Search Image" class="img-fluid w-100" style="height: 40vh; object-fit: cover;">
     </div>
-
+    <div class="mt-4">
+        <x-session-message />
+    </div>
     <!-- Jobs Section -->
     <div class="container mt-3">
         <h2 class="text-center mb-4">Available Jobs</h2>

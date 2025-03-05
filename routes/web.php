@@ -19,9 +19,11 @@ use App\Http\Controllers\PermissionController;
 
 Route::get('/', function () {
     return view('home');
-});
+})->name('home');
 
 Route::resource('permissions', PermissionController::class);
 Route::resource('roles', RoleController::class);
 Route::resource('users', UserController::class);
 Route::get('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/login', [AuthController::class, 'authenticateUser'])->name('authenticateUser');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
