@@ -34,7 +34,7 @@ class RoleController extends Controller
             $role->permissions()->sync($request->permissions); // Assign permissions
         }
 
-        return redirect()->route('roles.index')->with('success', 'Role created successfully');
+        return redirect()->route('roles.index')->with('message', 'Role created successfully');
     }
 
     public function edit(Role $role)
@@ -61,7 +61,7 @@ class RoleController extends Controller
             $role->permissions()->detach(); // Remove all permissions if none selected
         }
 
-        return redirect()->route('roles.index')->with('success', 'Role updated successfully');
+        return redirect()->route('roles.index')->with('message', 'Role updated successfully');
     }
 
     public function destroy(Role $role)
@@ -69,6 +69,6 @@ class RoleController extends Controller
         $role->permissions()->detach(); // Remove associated permissions before deleting
         $role->delete();
 
-        return redirect()->route('roles.index')->with('success', 'Role deleted successfully');
+        return redirect()->route('roles.index')->with('message', 'Role deleted successfully');
     }
 }

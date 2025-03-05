@@ -1,6 +1,6 @@
 <x-layout>
-    <div class="container">
-        <h1>Edit Role</h1>
+    <div class="container mt-3">
+        <h2 class="mt-2">Edit Role</h2>
         <form action="{{ route('roles.update', $role) }}" method="POST">
             @csrf
             @method('PUT')
@@ -28,19 +28,7 @@
                 @enderror
             </div>
 
-            <button type="submit" class="btn btn-primary">Update Role</button>
+            <button type="submit" class="btn btn-primary btn-sm">Update Role</button>
         </form>
     </div>
-
-    <!-- Initialize Select2 (Already included in the layout) -->
-    <script>
-        $(document).ready(function() {
-            // Apply Select2 on the permissions dropdown
-            $('#permissions').select2({
-                theme: 'bootstrap-5',
-                placeholder: "Select Permissions",
-                allowClear: true
-            });
-        });
-    </script>
 </x-layout>

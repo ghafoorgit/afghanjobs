@@ -1,7 +1,7 @@
 <x-layout>
     <div class="container mt-2">
-        <h1 class="mb-3">Permissions</h1>
-        <a href="{{ route('permissions.create') }}" class="btn btn-primary mb-3">Create Permission</a>
+        <h2 class="mb-3">Permissions</h2>
+        <a href="{{ route('permissions.create') }}" class="btn btn-primary btn-sm mb-3">Create Permission</a>
         <x-session-message />
         <table class="table table-striped table-hover">
             <thead>
@@ -19,7 +19,7 @@
                             <form action="{{ route('permissions.destroy', $permission) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this permission?')">Delete</button>
                             </form>
                         </td>
                     </tr>

@@ -1,6 +1,6 @@
 <x-layout>
-    <div class="container">
-        <h1>Create User</h1>
+    <div class="container mt-2">
+        <h2 class="mt-3 mb-3">Create User</h2>
         <form action="{{ route('users.store') }}" method="POST">
             @csrf
 
@@ -48,7 +48,7 @@
                 @enderror
             </div>
 
-            <button type="submit" class="btn btn-primary">Create User</button>
+            <button type="submit" class="btn btn-primary btn-sm">Create User</button>
         </form>
     </div>
 </x-layout>

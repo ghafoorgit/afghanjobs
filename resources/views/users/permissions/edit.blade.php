@@ -1,6 +1,6 @@
 <x-layout>
     <div class="container mt-2">
-        <h1 class="mt-3">Edit Permission</h1>
+        <h2 class="mt-3">Edit Permission</h2>
         <form action="{{ route('permissions.update', $permission) }}" method="POST">
             @csrf
             @method('PUT')
@@ -12,7 +12,7 @@
                 @enderror
             </div>
 
-            <button type="submit" class="btn btn-primary">Update Permission</button>
+            <button type="submit" class="btn btn-primary btn-sm">Update Permission</button>
         </form>
     </div>
 </x-layout>

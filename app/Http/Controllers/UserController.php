@@ -40,7 +40,7 @@ class UserController extends Controller
             $user->roles()->sync($request->roles); // Assign roles
         }
 
-        return redirect()->route('users.index')->with('success', 'User created successfully');
+        return redirect()->route('users.index')->with('message', 'User created successfully');
     }
 
     public function edit(User $user)
@@ -64,21 +64,28 @@ class UserController extends Controller
             'name' => $request->name,
             'email' => $request->email
         ]);
+        if ($request->password) {
+            $validatedPassword = $request->validate([
+                'password' => ['required', 'confirmed']
+            ]);
 
+            $user->update([
+                'password' => bcrypt($validatedPassword['password'])
+            ]);
+        }
         if ($request->has('roles')) {
             $user->roles()->sync($request->roles); // Update roles
         } else {
             $user->roles()->detach(); // Remove all roles if none selected
         }
 
-        return redirect()->route('users.index')->with('success', 'User updated successfully');
+        return redirect()->route('users.index')->with('message', 'User updated successfully');
     }
 
     public function destroy(User $user)
     {
         $user->roles()->detach(); // Remove associated roles before deleting
         $user->delete();
-
-        return redirect()->route('users.index')->with('success', 'User deleted successfully');
+        return redirect()->route('users.index')->with('message', 'User deleted successfully');
     }
 }

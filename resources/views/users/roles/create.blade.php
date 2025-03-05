@@ -1,6 +1,6 @@
 <x-layout>
-    <div class="container">
-        <h1>Create Role</h1>
+    <div class="container mt-2">
+        <h2>Create Role</h2>
         <form action="{{ route('roles.store') }}" method="POST">
             @csrf
             <div class="mb-3">
@@ -23,19 +23,7 @@
                 @enderror
             </div>
 
-            <button type="submit" class="btn btn-primary">Create Role</button>
+            <button type="submit" class="btn btn-primary btn-sm">Create Role</button>
         </form>
     </div>
-
-    <!-- Initialize Select2 (Already included in the layout) -->
-    <script>
-        $(document).ready(function() {
-            // Apply Select2 on the permissions dropdown
-            $('#permissions').select2({
-                theme: 'bootstrap-5',
-                placeholder: "Select Permissions",
-                allowClear: true
-            });
-        });
-    </script>
 </x-layout>
