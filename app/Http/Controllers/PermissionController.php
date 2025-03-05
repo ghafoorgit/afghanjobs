@@ -20,12 +20,12 @@ class PermissionController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'name' => 'required|unique:permissions'
         ]);
 
-        Permission::create($request->all());
-        return redirect()->route('permissions.index');
+        Permission::create($validated);
+        return redirect()->route('permissions.index')->with('message','The permission created successfully!');
     }
 
     public function edit(Permission $permission)
@@ -35,17 +35,18 @@ class PermissionController extends Controller
 
     public function update(Request $request, Permission $permission)
     {
-        $request->validate([
+        $validated = $request->validate([
             'name' => 'required|unique:permissions,name,' . $permission->id
         ]);
 
-        $permission->update($request->all());
-        return redirect()->route('permissions.index');
+        $permission->update($validated);
+        return redirect()->route('permissions.index')->with('message','The permission updated successfully!');
     }
 
     public function destroy(Permission $permission)
     {
         $permission->delete();
-        return redirect()->route('permissions.index');
+
+        return redirect()->route('permissions.index')->with('message','The permission deleted successfully!');
     }
 }

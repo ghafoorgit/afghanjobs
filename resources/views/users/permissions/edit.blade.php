@@ -1,6 +1,6 @@
 <x-layout>
-    <div class="container">
-        <h1>Edit Permission</h1>
+    <div class="container mt-2">
+        <h1 class="mt-3">Edit Permission</h1>
         <form action="{{ route('permissions.update', $permission) }}" method="POST">
             @csrf
             @method('PUT')

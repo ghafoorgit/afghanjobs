@@ -1,6 +1,6 @@
 <x-layout>
-    <div class="container">
-        <h1>Create Permission</h1>
+    <div class="container mt-2">
+        <h1 class="mt-3">Create Permission</h1>
         <form action="{{ route('permissions.store') }}" method="POST">
             @csrf
             <div class="mb-3">
@@ -11,7 +11,7 @@
                 @enderror
             </div>
 
-            <button type="submit" class="btn btn-primary">Create Permission</button>
+            <button type="submit" class="btn btn-primary">Save</button>
         </form>
     </div>
 </x-layout>

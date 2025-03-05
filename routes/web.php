@@ -20,6 +20,6 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::resource('roles', RoleController::class);
 Route::resource('permissions', PermissionController::class);
+Route::resource('roles', RoleController::class);
 Route::resource('users', UserController::class);
