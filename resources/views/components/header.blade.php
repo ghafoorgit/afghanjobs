@@ -38,7 +38,7 @@
 
                 @guest
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="{{ url('/login') }}">Login</a>
+                        <a class="nav-link text-white" href="{{ route('login') }}">Login</a>
                     </li>
                 @else
                     <li class="nav-item">
