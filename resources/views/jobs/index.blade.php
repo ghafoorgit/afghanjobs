@@ -8,7 +8,7 @@
         /* Hover effect for the card */
         .job-card-wrapper:hover {
             transform: translateY(-5px); /* Elevate the card slightly on hover */
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+            
         }
 
         /* Default striping effect for alternating rows */
@@ -58,8 +58,8 @@
                         <div class="card h-100 job-card">
                             <div class="card-body">
                                 <div class="d-flex align-items-center justify-content-between gap-3 flex-wrap">
-                                    <h5 class="card-title mb-0" style="font-weight: bold; text-decoration: underline; cursor: pointer;">
-                                        <a href="{{ route('jobs.show', $job->id) }}" class="text-decoration-none text-dark">
+                                    <h5 class="card-title mb-0" style="font-weight: bold;  cursor: pointer;">
+                                        <a href="{{ route('jobs.show', $job->id) }}" class="text-decoration-none text-dark" style="color:blue;">
                                             {{ $job->job_title }}
                                         </a>
                                     </h5>
