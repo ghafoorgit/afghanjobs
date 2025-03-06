@@ -20,6 +20,9 @@
                     <a class="nav-link text-white" href="{{ url('/jobs') }}">Jobs</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link text-white" href="{{ url('/jobs/create') }}">Post Job</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link text-white" href="{{ url('/about') }}">About</a>
                 </li>
                 <li class="nav-item">
