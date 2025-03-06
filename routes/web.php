@@ -1,15 +1,17 @@
 <?php
 
+use App\Models\Job;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\JobController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\AuthController;
-use App\Http\Controllers\JobController;
 use App\Http\Controllers\PermissionController;
 
 
 Route::get('/', function () {
-    return view('home');
+    $jobs = Job::latest()->paginate(6);
+    return view('home', compact('jobs'));
 })->name('home');
 
 // user management
