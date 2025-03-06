@@ -23,5 +23,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ContractTypesSeeder::class);
         $this->call(WorkDurationSeeder::class);
         $this->call(GendersSeeder::class);
+        $this->call(JobSeeder::class);
     }
 }

@@ -3,41 +3,36 @@
         <x-session-message />
     </div>
 
-    <div class="container mx-auto">
-        <h2 class="text-2xl font-bold mb-4">Job Listings</h2>
-        <a href="{{ route('jobs.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded">Create Job</a>
-
-        <table class="w-full mt-4 border-collapse border border-gray-300">
-            <thead>
-                <tr class="bg-gray-100">
-                    <th class="border border-gray-300 px-4 py-2">Title</th>
-                    <th class="border border-gray-300 px-4 py-2">Company</th>
-                    <th class="border border-gray-300 px-4 py-2">Location</th>
-                    <th class="border border-gray-300 px-4 py-2">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
+    <!-- Jobs Section -->
+    <div class="container mt-3">
+        <h2 class="text-center mb-4">Available Jobs</h2>
+        <div class="table table-striped table-hover">
+            <div class="row">
+                <!-- Job Cards -->
                 @foreach ($jobs as $job)
-                    <tr>
-                        <td class="border border-gray-300 px-4 py-2">{{ $job->job_title }}</td>
-                        <td class="border border-gray-300 px-4 py-2">{{ $job->company_name }}</td>
-                        <td class="border border-gray-300 px-4 py-2">{{ $job->job_location }}</td>
-                        <td class="border border-gray-300 px-4 py-2">
-                            <a href="{{ route('jobs.show', $job) }}" class="text-blue-500">View</a> |
-                            <a href="{{ route('jobs.edit', $job) }}" class="text-green-500">Edit</a> |
-                            <form action="{{ route('jobs.destroy', $job) }}" method="POST" class="inline">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="text-red-500" onclick="return confirm('Are you sure?')">Delete</button>
-                            </form>
-                        </td>
-                    </tr>
+                    <div class="col-md-12 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center justify-content-between gap-3 flex-wrap">
+                                    <h5 class="card-title mb-0" style="font-weight: bold; text-decoration: underline; cursor: pointer;">
+                                        <a href="{{ route('jobs.show', $job->id) }}" class="text-decoration-none text-dark">
+                                            {{ $job->job_title }}
+                                        </a>
+                                    </h5>
+                                    <p class="mb-0"><strong>Opening Date:</strong> {{ \Carbon\Carbon::parse($job->post_date)->format('M d, Y') }}</p>
+                                    <p class="mb-0"><strong>Closing Date:</strong> {{ \Carbon\Carbon::parse($job->closing_date)->format('M d, Y') }}</p>
+                                    <p class="mb-0"><strong>Location:</strong> {{ $job->job_location }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 @endforeach
-            </tbody>
-        </table>
+            </div>
+        </div>
 
-        <div class="mt-4">
-            {{ $jobs->links() }}
+        <!-- Pagination Section -->
+        <div class="d-flex justify-content-center mt-4">
+            {{ $jobs->links('pagination::bootstrap-5') }}
         </div>
     </div>
 </x-layout>
