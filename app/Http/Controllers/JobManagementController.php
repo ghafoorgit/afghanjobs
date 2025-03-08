@@ -31,42 +31,42 @@ class JobManagementController extends Controller
      * Store a newly created job.
      */
     public function store(Request $request)
-{
-    $request->validate([
-        'job_title' => 'required|string|max:255',
-        'company_name' => 'required|string|max:255',
-        'job_location' => 'required|array',
-        'job_location.*' => 'exists:provinces,id',
-        'work_duration_id' => 'nullable|exists:work_durations,id',
-        'gender_id' => 'nullable|exists:genders,id',
-        'post_date' => 'required|date',
-        'closing_date' => 'required|date|after_or_equal:post_date',
-        'reference_number' => 'nullable|string|max:255',
-        'number_of_vacancies' => 'nullable|integer|min:1',
-        'salary_range' => 'nullable|string|max:255',
-        'years_of_experience' => 'nullable|string|max:255',
-        'probationary_period' => 'nullable|string|max:255',
-        'contract_type_id' => 'nullable|exists:contract_types,id',
-        'about_company' => 'nullable|string',
-        'job_summary' => 'nullable|string',
-        'duties_responsibilities' => 'nullable|string',
-        'job_requirements' => 'nullable|string',
-        'submission_guideline' => 'nullable|string',
-        'submission_email' => 'nullable|email|max:255',
-        'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-    ]);
+    {
+        $request->validate([
+            'job_title' => 'required|string|max:255',
+            'company_name' => 'required|string|max:255',
+            'job_location' => 'required|array',
+            'job_location.*' => 'exists:provinces,id',
+            'work_duration_id' => 'nullable|exists:work_durations,id',
+            'gender_id' => 'nullable|exists:genders,id',
+            'post_date' => 'required|date',
+            'closing_date' => 'required|date|after_or_equal:post_date',
+            'reference_number' => 'nullable|string|max:255',
+            'number_of_vacancies' => 'nullable|integer|min:1',
+            'salary_range' => 'nullable|string|max:255',
+            'years_of_experience' => 'nullable|string|max:255',
+            'probationary_period' => 'nullable|string|max:255',
+            'contract_type_id' => 'nullable|exists:contract_types,id',
+            'about_company' => 'nullable|string',
+            'job_summary' => 'nullable|string',
+            'duties_responsibilities' => 'nullable|string',
+            'job_requirements' => 'nullable|string',
+            'submission_guideline' => 'nullable|string',
+            'submission_email' => 'nullable|email|max:255',
+            'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
 
-    $data = $request->except('job_location', 'logo');
+        $data = $request->except('job_location', 'logo');
 
-    if ($request->hasFile('logo')) {
-        $data['logo'] = $request->file('logo')->store('logos', 'public');
+        if ($request->hasFile('logo')) {
+            $data['logo'] = $request->file('logo')->store('logos', 'public');
+        }
+
+        $job = Job::create($data);
+        $job->provinces()->sync($request->job_location);
+
+        return redirect()->route('jobs.index')->with('message', 'Job created successfully!');
     }
-
-    $job = Job::create($data);
-    $job->provinces()->sync($request->job_location);
-
-    return redirect()->route('jobs.index')->with('message', 'Job created successfully!');
-}
 
 
 

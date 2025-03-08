@@ -62,6 +62,34 @@
         .post-job-button:hover {
             background-color: #0056b3;
         }
+
+        /* Actions Button Styling */
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .action-buttons button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            font-size: 14px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .action-buttons button.edit {
+            background-color: #ffc107;
+        }
+
+        .action-buttons button.delete {
+            background-color: #dc3545;
+        }
+
+        .action-buttons button:hover {
+            opacity: 0.8;
+        }
     </style>
 
     <div class="mt-4">
@@ -93,6 +121,22 @@
                                     <p class="mb-0"><strong>Opening Date:</strong> {{ \Carbon\Carbon::parse($job->post_date)->format('M d, Y') }}</p>
                                     <p class="mb-0"><strong>Closing Date:</strong> {{ \Carbon\Carbon::parse($job->closing_date)->format('M d, Y') }}</p>
                                     <p class="mb-0"><strong>Location:</strong> {{ $job->provinces->pluck('name')->implode(',') }}</p>
+                                </div>
+                                <div class="action-buttons mt-3">
+                                    <!-- Show Button -->
+                                    <a href="{{ route('jobs.show', $job->id) }}">
+                                        <button class="btn btn-info">Show</button>
+                                    </a>
+                                    <!-- Edit Button -->
+                                    <a href="{{ route('jobs.edit', $job->id) }}">
+                                        <button class="btn btn-warning edit">Edit</button>
+                                    </a>
+                                    <!-- Delete Button -->
+                                    <form action="{{ route('jobs.destroy', $job->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this job?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger delete">Delete</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
