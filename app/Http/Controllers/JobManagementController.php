@@ -150,7 +150,27 @@ class JobManagementController extends Controller
      */
     public function destroy(Job $job)
     {
-        $job->delete();
-        return redirect()->route('jobs.index')->with('success', 'Job deleted successfully.');
+        try {
+            // Check if the Job exists before attempting to delete
+            if (!$job) {
+                return redirect()->route('jobs.index')->with('error', 'Job not found.');
+            }
+
+            // Delete the logo if it exists in the 'logos' folder
+            if ($job->logo && file_exists(public_path('storage/logos/' . $job->logo))) {
+                // Delete the logo file from the 'logos' folder
+                unlink(public_path('storage/logos/' . $job->logo));
+            }
+
+            // Perform the deletion of the Job
+            $job->delete();
+
+            // Redirect with success message
+            return redirect()->route('jobs.index')->with('message', 'Job and logo deleted successfully.');
+        } catch (\Exception $e) {
+            // In case of any error, redirect with an error message
+            return redirect()->route('jobs.index')->with('error', 'An error occurred while deleting the job.');
+        }
     }
+
 }
