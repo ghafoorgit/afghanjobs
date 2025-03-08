@@ -33,6 +33,7 @@ return new class extends Migration
             $table->text('job_requirements');
             $table->text('submission_guideline');
             $table->string('submission_email');
+            $table->string('logo')->nullable();
             $table->timestamps();
         });
     }

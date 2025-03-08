@@ -29,6 +29,7 @@ class Job extends Model
         'job_requirements',
         'submission_guideline',
         'submission_email',
+        'logo',
     ];
 
     public function contractType()

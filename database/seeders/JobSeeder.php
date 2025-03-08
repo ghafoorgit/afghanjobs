@@ -25,7 +25,7 @@ class JobSeeder extends Seeder
         }
 
         // Insert sample jobs
-        for($i = 0; $i<25; $i++){
+        for($i = 0; $i<5; $i++){
             DB::table('jobs')->insert([
                 [
                     'job_title' => 'Software Engineer',
@@ -48,6 +48,7 @@ class JobSeeder extends Seeder
                     'job_requirements' => 'Strong knowledge of PHP, Laravel, and JavaScript.',
                     'submission_guideline' => 'Send your resume to the email below.',
                     'submission_email' => 'jobs@techsolutions.af',
+                    'logo' => 'logos/software_engineer_logo.png',  // Simulated logo path
                     'created_at' => now(),
                     'updated_at' => now(),
                 ],
@@ -72,11 +73,11 @@ class JobSeeder extends Seeder
                     'job_requirements' => 'Experience in digital marketing and SEO.',
                     'submission_guideline' => 'Send your resume to the email below.',
                     'submission_email' => 'hr@afghanbusiness.af',
+                    'logo' => 'logos/marketing_specialist_logo.png',  // Simulated logo path
                     'created_at' => now(),
                     'updated_at' => now(),
                 ]
             ]);
         }
-
     }
 }

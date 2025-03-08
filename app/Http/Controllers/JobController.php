@@ -33,6 +33,7 @@ class JobController extends Controller
      */
     public function store(Request $request)
     {
+        // Validate incoming request
         $request->validate([
             'job_title' => 'required',
             'company_name' => 'required',
@@ -54,12 +55,44 @@ class JobController extends Controller
             'job_requirements' => 'required',
             'submission_guideline' => 'required',
             'submission_email' => 'required|email',
+            'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Logo validation (optional)
         ]);
 
-        Job::create($request->all());
+        // Handle file upload for the logo if it is provided
+        $logoPath = null;
+        if ($request->hasFile('logo')) {
+            $logoPath = $request->file('logo')->store('logos', 'public');
+        }
 
-        return redirect()->route('jobs.index')->with('success', 'Job created successfully.');
+        // Create a new Job record with the validated data
+        Job::create([
+            'job_title' => $request->job_title,
+            'company_name' => $request->company_name,
+            'job_location' => $request->job_location,
+            'education' => $request->education,
+            'post_date' => $request->post_date,
+            'closing_date' => $request->closing_date,
+            'reference_number' => $request->reference_number,
+            'number_of_vacancies' => $request->number_of_vacancies,
+            'salary_range' => $request->salary_range,
+            'years_of_experience' => $request->years_of_experience,
+            'probationary_period' => $request->probationary_period,
+            'contract_type_id' => $request->contract_type_id,
+            'work_duration_id' => $request->work_duration_id,
+            'gender_id' => $request->gender_id,
+            'about_company' => $request->about_company,
+            'job_summary' => $request->job_summary,
+            'duties_responsibilities' => $request->duties_responsibilities,
+            'job_requirements' => $request->job_requirements,
+            'submission_guideline' => $request->submission_guideline,
+            'submission_email' => $request->submission_email,
+            'logo' => $logoPath, // Store the logo path if uploaded
+        ]);
+
+        // Redirect with success message
+        return redirect()->route('jobs.index')->with('message', 'Job created successfully.');
     }
+
 
 
     /**

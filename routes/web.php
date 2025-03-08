@@ -26,7 +26,6 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Job posting section
 
-Route::get('/jobs',[JobController::class,'index']);
 Route::get('/jobs', [JobController::class, 'index'])->name('jobs.index'); // List all jobs
 Route::get('/jobs/create', [JobController::class, 'create'])->name('jobs.create'); // Show create form
 Route::post('/jobs', [JobController::class, 'store'])->name('jobs.store'); // Store job
