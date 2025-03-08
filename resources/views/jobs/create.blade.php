@@ -1,13 +1,13 @@
 <x-layout>
-    <div class="container">
-        <h2><strong>Create Job</strong></h2>
+    <div class="container mt-3">
+        <h2 class="mb-3"><strong>Create Job</strong></h2>
         <form action="{{ route('jobs.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
             <div class="row">
                 <div class="col-md-6">
                     <label for="job_title" class="form-label"><strong>Job Title</strong></label>
-                    <input type="text" class="form-control @error('job_title') is-invalid @enderror" id="job_title" name="job_title" value="{{ old('job_title') }}">
+                    <input type="text" class="form-control @error('job_title') is-invalid @enderror" id="job_title" name="job_title" value="{{ old('job_title') }}" placeholder="Click to start writing...">
                     @error('job_title')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -15,7 +15,7 @@
 
                 <div class="col-md-6">
                     <label for="company_name" class="form-label"><strong>Company Name</strong></label>
-                    <input type="text" class="form-control @error('company_name') is-invalid @enderror" id="company_name" name="company_name" value="{{ old('company_name') }}">
+                    <input type="text" class="form-control @error('company_name') is-invalid @enderror" id="company_name" name="company_name" value="{{ old('company_name') }}" placeholder="Click to start writing...">
                     @error('company_name')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -26,7 +26,7 @@
             <div class="row mt-3">
                 <div class="col-md-6">
                     <label for="education" class="form-label"><strong>Education</strong></label>
-                    <input type="text" class="form-control @error('education') is-invalid @enderror" id="education" name="education" value="{{ old('education') }}">
+                    <input type="text" class="form-control @error('education') is-invalid @enderror" id="education" name="education" value="{{ old('education') }}" placeholder="Click to start writing...">
                     @error('education')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -96,7 +96,7 @@
             <div class="row mt-3">
                 <div class="col-md-6">
                     <label for="reference_number" class="form-label"><strong>Reference Number</strong></label>
-                    <input type="text" class="form-control @error('reference_number') is-invalid @enderror" id="reference_number" name="reference_number" value="{{ old('reference_number') }}">
+                    <input type="text" class="form-control @error('reference_number') is-invalid @enderror" id="reference_number" name="reference_number" value="{{ old('reference_number') }}" placeholder="Click to start writing...">
                     @error('reference_number')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -104,7 +104,7 @@
 
                 <div class="col-md-6">
                     <label for="number_of_vacancies" class="form-label"><strong>Number of Vacancies</strong></label>
-                    <input type="number" class="form-control @error('number_of_vacancies') is-invalid @enderror" id="number_of_vacancies" name="number_of_vacancies" value="{{ old('number_of_vacancies') }}">
+                    <input type="number" class="form-control @error('number_of_vacancies') is-invalid @enderror" id="number_of_vacancies" name="number_of_vacancies" value="{{ old('number_of_vacancies') }}" placeholder="Click to start writing...">
                     @error('number_of_vacancies')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -114,7 +114,7 @@
             <div class="row mt-3">
                 <div class="col-md-6">
                     <label for="salary_range" class="form-label"><strong>Salary Range</strong></label>
-                    <input type="text" class="form-control @error('salary_range') is-invalid @enderror" id="salary_range" name="salary_range" value="{{ old('salary_range') }}">
+                    <input type="text" class="form-control @error('salary_range') is-invalid @enderror" id="salary_range" name="salary_range" value="{{ old('salary_range') }}" placeholder="Click to start writing...">
                     @error('salary_range')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -122,7 +122,7 @@
 
                 <div class="col-md-6">
                     <label for="years_of_experience" class="form-label"><strong>Years of Experience</strong></label>
-                    <input type="text" class="form-control @error('years_of_experience') is-invalid @enderror" id="years_of_experience" name="years_of_experience" value="{{ old('years_of_experience') }}">
+                    <input type="text" class="form-control @error('years_of_experience') is-invalid @enderror" id="years_of_experience" name="years_of_experience" value="{{ old('years_of_experience') }}" placeholder="Click to start writing...">
                     @error('years_of_experience')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -132,7 +132,7 @@
             <div class="row mt-3">
                 <div class="col-md-6">
                     <label for="probationary_period" class="form-label"><strong>Probationary Period</strong></label>
-                    <input type="text" class="form-control @error('probationary_period') is-invalid @enderror" id="probationary_period" name="probationary_period" value="{{ old('probationary_period') }}">
+                    <input type="text" class="form-control @error('probationary_period') is-invalid @enderror" id="probationary_period" name="probationary_period" value="{{ old('probationary_period') }}" placeholder="Click to start writing...">
                     @error('probationary_period')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -154,7 +154,7 @@
 
             <div class="mt-3">
                 <label for="about_company" class="form-label"><strong>About Company</strong></label>
-                <textarea class="form-control @error('about_company') is-invalid @enderror" id="about_company" name="about_company" rows="3">{{ old('about_company') }}</textarea>
+                <textarea class="form-control @error('about_company') is-invalid @enderror" id="about_company" name="about_company" rows="3" placeholder="Click to start writing...">{{ old('about_company') }}</textarea>
                 @error('about_company')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
@@ -162,7 +162,7 @@
 
             <div class="mt-3">
                 <label for="job_summary" class="form-label"><strong>Job Summary</strong></label>
-                <textarea class="form-control @error('job_summary') is-invalid @enderror" id="job_summary" name="job_summary" rows="3">{{ old('job_summary') }}</textarea>
+                <textarea class="form-control @error('job_summary') is-invalid @enderror" id="job_summary" name="job_summary" rows="3" placeholder="Click to start writing...">{{ old('job_summary') }}</textarea>
                 @error('job_summary')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
@@ -170,7 +170,7 @@
 
             <div class="mt-3">
                 <label for="duties_responsibilities" class="form-label"><strong>Duties & Responsibilities</strong></label>
-                <textarea class="form-control @error('duties_responsibilities') is-invalid @enderror" id="duties_responsibilities" name="duties_responsibilities" rows="3">{{ old('duties_responsibilities') }}</textarea>
+                <textarea class="form-control @error('duties_responsibilities') is-invalid @enderror" id="duties_responsibilities" name="duties_responsibilities" rows="5" placeholder="Click to start writing...">{{ old('duties_responsibilities') }}</textarea>
                 @error('duties_responsibilities')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
@@ -178,7 +178,7 @@
 
             <div class="mt-3">
                 <label for="job_requirements" class="form-label"><strong>Job Requirements</strong></label>
-                <textarea class="form-control @error('job_requirements') is-invalid @enderror" id="job_requirements" name="job_requirements" rows="3">{{ old('job_requirements') }}</textarea>
+                <textarea class="form-control @error('job_requirements') is-invalid @enderror" id="job_requirements" name="job_requirements" rows="5" placeholder="Click to start writing...">{{ old('job_requirements') }}</textarea>
                 @error('job_requirements')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
@@ -186,7 +186,7 @@
 
             <div class="mt-3">
                 <label for="submission_guideline" class="form-label"><strong>Submission Guideline</strong></label>
-                <textarea class="form-control @error('submission_guideline') is-invalid @enderror" id="submission_guideline" name="submission_guideline" rows="3">{{ old('submission_guideline') }}</textarea>
+                <textarea class="form-control @error('submission_guideline') is-invalid @enderror" id="submission_guideline" name="submission_guideline" rows="3" placeholder="Click to start writing...">{{ old('submission_guideline') }}</textarea>
                 @error('submission_guideline')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
@@ -194,7 +194,7 @@
 
             <div class="mt-3">
                 <label for="submission_email" class="form-label"><strong>Submission Email</strong></label>
-                <input type="email" class="form-control @error('submission_email') is-invalid @enderror" id="submission_email" name="submission_email" value="{{ old('submission_email') }}">
+                <input type="email" class="form-control @error('submission_email') is-invalid @enderror" id="submission_email" name="submission_email" value="{{ old('submission_email') }}" placeholder="Click to start writing...">
                 @error('submission_email')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
@@ -212,4 +212,37 @@
             <button type="submit" class="btn btn-primary mt-3">Create Job</button>
         </form>
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            function addBulletOnFocus(event) {
+                let textarea = event.target;
+                if (textarea.value.trim() === "") {
+                    textarea.value = "• ";
+                }
+            }
+
+            function addBulletOnEnter(event) {
+                if (event.key === "Enter") {
+                    event.preventDefault();
+                    let textarea = event.target;
+                    let cursorPos = textarea.selectionStart;
+                    let textBefore = textarea.value.substring(0, cursorPos);
+                    let textAfter = textarea.value.substring(cursorPos);
+
+                    // Insert a new bullet point
+                    textarea.value = textBefore + "\n• " + textAfter;
+                    textarea.selectionStart = textarea.selectionEnd = cursorPos + 3;
+                }
+            }
+
+            // Select both textareas and attach event listeners
+            let textareas = document.querySelectorAll("#duties_responsibilities, #job_requirements");
+            textareas.forEach(textarea => {
+                textarea.addEventListener("focus", addBulletOnFocus);  // Add bullet when clicking
+                textarea.addEventListener("keydown", addBulletOnEnter); // Add bullet on Enter
+            });
+        });
+    </script>
+
 </x-layout>
