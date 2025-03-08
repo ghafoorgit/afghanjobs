@@ -131,7 +131,7 @@ class JobManagementController extends Controller
         if ($request->hasFile('logo')) {
             // Delete the old logo if it exists
             if ($job->logo) {
-                Storage::delete('public/' . $job->logo);
+                Storage::delete($job->logo);
             }
             $data['logo'] = $request->file('logo')->store('logos', 'public');
         }
