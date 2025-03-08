@@ -8,7 +8,6 @@
         /* Hover effect for the card */
         .job-card-wrapper:hover {
             transform: translateY(-5px); /* Elevate the card slightly on hover */
-            
         }
 
         /* Default striping effect for alternating rows */
@@ -42,14 +41,42 @@
         .job-card .card-title a:hover {
             color: #007bff; /* Blue color for hover */
         }
+
+        /* Aligning Available Jobs title and Post Job button */
+        .header-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .post-job-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .post-job-button:hover {
+            background-color: #0056b3;
+        }
     </style>
+
     <div class="mt-4">
         <x-session-message />
     </div>
 
     <!-- Jobs Section -->
     <div class="container mt-3">
-        <h2 class="text-center mb-4">Available Jobs</h2>
+        <div class="header-section mb-4">
+            <h2 class="text-center mb-0">Posted Jobs</h2>
+            <a href="{{ route('jobs.create') }}">
+                <button class="post-job-button">Post Job</button>
+            </a>
+        </div>
+
         <div class="table table-striped table-hover">
             <div class="row">
                 <!-- Job Cards -->
@@ -58,7 +85,7 @@
                         <div class="card h-100 job-card">
                             <div class="card-body">
                                 <div class="d-flex align-items-center justify-content-between gap-3 flex-wrap">
-                                    <h5 class="card-title mb-0" style="font-weight: bold;  cursor: pointer;">
+                                    <h5 class="card-title mb-0" style="font-weight: bold; cursor: pointer;">
                                         <a href="{{ route('jobs.show', $job->id) }}" class="text-decoration-none text-dark" style="color:blue;">
                                             {{ $job->job_title }}
                                         </a>

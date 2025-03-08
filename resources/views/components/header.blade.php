@@ -17,10 +17,10 @@
 
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="{{ url('/jobs') }}">Jobs</a>
+                    <a class="nav-link text-white" href="{{ url('/') }}">Jobs</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="{{ url('/jobs/create') }}">Post Job</a>
+                    <a class="nav-link text-white" href="{{ url('/jobs') }}">Job Management</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-white" href="{{ url('/about') }}">About</a>
