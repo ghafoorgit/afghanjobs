@@ -8,6 +8,8 @@ use App\Models\Province;
 use App\Models\ContractType;
 use App\Models\WorkDuration;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+
 use Illuminate\Support\Facades\Storage;
 
 class JobManagementController extends Controller
@@ -148,29 +150,28 @@ class JobManagementController extends Controller
     /**
      * Remove the job.
      */
-    public function destroy(Job $job)
+
+
+
+
+     public function destroy(Job $job)
     {
-        try {
-            // Check if the Job exists before attempting to delete
-            if (!$job) {
-                return redirect()->route('jobs.index')->with('error', 'Job not found.');
+        // Check if the job has a logo
+        if ($job->logo) {
+            // Use the path from $job->logo directly
+            $logoPath = $job->logo;
+
+            // Check if the logo exists in storage before attempting to delete
+            if (Storage::exists($logoPath)) {
+                // Delete the logo file from local storage (storage/app/public/logos)
+                Storage::delete($logoPath);
             }
-
-            // Delete the logo if it exists in the 'logos' folder
-            if ($job->logo && file_exists(public_path('storage/logos/' . $job->logo))) {
-                // Delete the logo file from the 'logos' folder
-                unlink(public_path('storage/logos/' . $job->logo));
-            }
-
-            // Perform the deletion of the Job
-            $job->delete();
-
-            // Redirect with success message
-            return redirect()->route('jobs.index')->with('message', 'Job and logo deleted successfully.');
-        } catch (\Exception $e) {
-            // In case of any error, redirect with an error message
-            return redirect()->route('jobs.index')->with('error', 'An error occurred while deleting the job.');
         }
-    }
 
+        // Delete the job from the database
+        $job->delete();
+
+        // Redirect with a success message
+        return redirect()->route('jobs.index')->with('message', 'The job and its logo have been deleted successfully!');
+    }
 }
