@@ -22,19 +22,26 @@
                 </div>
             </div>
 
+            <!-- Education and Job Location in the same row -->
             <div class="row mt-3">
                 <div class="col-md-6">
-                    <label for="job_location" class="form-label"><strong>Job Location</strong></label>
-                    <input type="text" class="form-control @error('job_location') is-invalid @enderror" id="job_location" name="job_location" value="{{ old('job_location') }}">
-                    @error('job_location')
+                    <label for="education" class="form-label"><strong>Education</strong></label>
+                    <input type="text" class="form-control @error('education') is-invalid @enderror" id="education" name="education" value="{{ old('education') }}">
+                    @error('education')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
 
                 <div class="col-md-6">
-                    <label for="education" class="form-label"><strong>Education</strong></label>
-                    <input type="text" class="form-control @error('education') is-invalid @enderror" id="education" name="education" value="{{ old('education') }}">
-                    @error('education')
+                    <label for="job_location" class="form-label"><strong>Job Location</strong></label>
+                    <select class="form-select select2 @error('job_location') is-invalid @enderror" id="job_location" name="job_location[]" multiple>
+                        @foreach($provinces as $province)
+                            <option value="{{ $province->id }}" @if(collect(old('job_location'))->contains($province->id)) selected @endif>
+                                {{ $province->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                    @error('job_location')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>

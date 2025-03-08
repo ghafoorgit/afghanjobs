@@ -11,7 +11,6 @@ class Job extends Model
     protected $fillable = [
         'job_title',
         'company_name',
-        'job_location',
         'education',
         'post_date',
         'closing_date',
@@ -46,4 +45,10 @@ class Job extends Model
     {
         return $this->belongsTo(Gender::class);
     }
+
+    public function provinces()
+    {
+        return $this->belongsToMany(Province::class, 'job_province');
+    }
+
 }

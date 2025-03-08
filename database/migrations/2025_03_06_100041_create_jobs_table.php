@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('job_title');
             $table->string('company_name');
-            $table->string('job_location');
             $table->string('education');
             $table->date('post_date');
             $table->date('closing_date');
