@@ -49,17 +49,6 @@
             align-items: center;
         }
 
-        /* .post-job-button {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            margin-top: 12px;
-            padding: 7px 12px;
-            font-size: 16px;
-            border-radius: 5px;
-            cursor: pointer;
-        } */
-
         .post-job-button:hover {
             background-color: #0056b3;
         }
@@ -70,23 +59,6 @@
             gap: 10px;
         }
 
-        .action-buttons button {
-            background-color: #28a745;
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            font-size: 14px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .action-buttons button.edit {
-            background-color: #ffc107;
-        }
-
-        .action-buttons button.delete {
-            background-color: #dc3545;
-        }
 
         .action-buttons button:hover {
             opacity: 0.8;
@@ -126,17 +98,17 @@
                                 <div class="action-buttons mt-3">
                                     <!-- Show Button -->
                                     <a href="{{ route('jobs.show', $job->id) }}">
-                                        <button class="btn btn-info">Show</button>
+                                        <button class="btn btn-sm" style="background-color: #2973B2; color:white;">Show</button>
                                     </a>
                                     <!-- Edit Button -->
                                     <a href="{{ route('jobs.edit', $job->id) }}">
-                                        <button class="btn btn-warning edit">Edit</button>
+                                        <button class="btn btn-success btn-sm">Edit</button>
                                     </a>
                                     <!-- Delete Button -->
                                     <form action="{{ route('jobs.destroy', $job->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this job?');">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger delete">Delete</button>
+                                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                                     </form>
                                 </div>
                             </div>
