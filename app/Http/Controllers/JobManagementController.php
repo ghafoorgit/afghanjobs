@@ -82,18 +82,19 @@ class JobManagementController extends Controller
 
 
     public function show(Job $job)
-    {
-        // Ensure JSON fields are properly decoded
-        $job->duties_responsibilities = is_string($job->duties_responsibilities)
-            ? array_map('trim', json_decode($job->duties_responsibilities, true) ?? [])
-            : [];
+{
+    // If the duties_responsibilities and job_requirements are not JSON but rather a string with bullet points
+    $job->duties_responsibilities = !empty($job->duties_responsibilities)
+        ? explode('•', $job->duties_responsibilities)
+        : [];
 
-        $job->job_requirements = is_string($job->job_requirements)
-            ? array_map('trim', json_decode($job->job_requirements, true) ?? [])
-            : [];
+    $job->job_requirements = !empty($job->job_requirements)
+        ? explode('•', $job->job_requirements)
+        : [];
 
-        return view('jobs.show', compact('job'));
-    }
+    return view('jobs.show', compact('job'));
+}
+
 
 
 

@@ -9,7 +9,7 @@
             <ul class="navbar-nav mx-auto" style="width: 50%;"> <!-- Centering the search bar -->
                 <li class="nav-item w-100">
                     <form class="d-flex w-100" action="{{ url('/search') }}" method="GET">
-                        <input class="form-control me-2 flex-grow-1" type="search" placeholder="Search job title" aria-label="Search" name="query">
+                        <input class="form-control me-2 flex-grow-1" type="search" placeholder="Search job title or by location" aria-label="Search" name="query">
                         <button class="btn btn-outline-light" type="submit">Search</button>
                     </form>
                 </li>
