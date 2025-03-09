@@ -1,5 +1,5 @@
 <x-layout>
-    <div class="container mt-3" style="background-color: #f0f0f0;">
+    <div class="container-fluid mt-3" >
         <div class="row justify-content-center">
             <div class="col-md-10">
                 <div class="card shadow-lg">

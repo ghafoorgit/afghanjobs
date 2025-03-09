@@ -53,7 +53,8 @@
             background-color: #007bff;
             color: white;
             border: none;
-            padding: 10px 20px;
+            margin-top: 12px;
+            padding: 7px 12px;
             font-size: 16px;
             border-radius: 5px;
             cursor: pointer;
@@ -97,7 +98,7 @@
     </div>
 
     <!-- Jobs Section -->
-    <div class="container mt-3">
+    <div class="container mt-3 rounded" style="background-color: #f0f0f0;">
         <div class="header-section mb-4">
             <h2 class="text-center mb-0">Posted Jobs</h2>
             <a href="{{ route('jobs.create') }}">

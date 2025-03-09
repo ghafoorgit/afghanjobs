@@ -48,7 +48,7 @@
     </div>
 
     <!-- Jobs Section -->
-    <div class="container mt-3">
+    <div class="container mt-3 rounded" >
         <h2 class="text-center mb-4">Available Jobs</h2>
         <div class="table table-striped table-hover">
             <div class="row">
