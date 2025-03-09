@@ -17,8 +17,9 @@ class PermissionsSeeder extends Seeder
             ['name' => 'post_job' , 'created_at'=>now(), 'updated_at'=>now()],
             ['name' => 'edit_job' , 'created_at'=>now(), 'updated_at'=>now()],
             ['name' => 'delete_job' , 'created_at'=>now(), 'updated_at'=>now()],
-            ['name' => 'create_users' , 'created_at'=>now(), 'updated_at'=>now()],
-            ['name' => 'manage_settings' , 'created_at'=>now(), 'updated_at'=>now()],
+            ['name' => 'add_user' , 'created_at'=>now(), 'updated_at'=>now()],
+            ['name' => 'appvoce_job' , 'created_at'=>now(), 'updated_at'=>now()],
+            ['name' => 'reject_job' , 'created_at'=>now(), 'updated_at'=>now()],
         ]);
     }
 }

@@ -1,7 +1,9 @@
 <x-layout>
     <div class="container mt-2">
-        <h2 class="mb-3">Permissions</h2>
-        <a href="{{ route('permissions.create') }}" class="btn btn-primary btn-sm mb-3">Create Permission</a>
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2 class="mb-0">Permissions</h2>
+            <a href="{{ route('permissions.create') }}" class="btn btn-primary btn-sm">Create Permission</a>
+        </div>
         <x-session-message />
         <table class="table table-striped table-hover">
             <thead>
