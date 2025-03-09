@@ -65,7 +65,7 @@
                                     </h5>
                                     <p class="mb-0"><strong>Opening Date:</strong> {{ \Carbon\Carbon::parse($job->post_date)->format('M d, Y') }}</p>
                                     <p class="mb-0"><strong>Closing Date:</strong> {{ \Carbon\Carbon::parse($job->closing_date)->format('M d, Y') }}</p>
-                                    <p class="mb-0"><strong>Location:</strong> {{ $job->job_location }}</p>
+                                    <p class="mb-0"><strong>Location:</strong> {{ $job->provinces->pluck('name')->implode(',') }}</p>
                                 </div>
                             </div>
                         </div>
