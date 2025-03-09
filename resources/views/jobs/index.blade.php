@@ -124,8 +124,8 @@
 
                                     <!-- Approve/Reject Buttons -->
                                     <div class="approve-reject-buttons">
-                                        <button class="btn btn-success btn-sm">Approve</button>
-                                        <button class="btn btn-danger btn-sm">Reject</button>
+                                        <button class="btn btn-info btn-sm">Approve</button>
+                                        <button class="btn btn-warning btn-sm">Reject</button>
                                     </div>
                                 </div>
                             </div>
