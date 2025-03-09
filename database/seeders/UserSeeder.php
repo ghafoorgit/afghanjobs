@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
     {
         $user1 = User::create([
             'name' => 'Abdul Ghafoor Talash',
-            'email' => 'afghanjobs@afghanjobs.af',
+            'email' => 'jobs@afghanjobs.af',
             'password' => Hash::make('Admin@Admin'), // Ensure to use hashed password
         ]);
         $adminRole = Role::where('name', 'super_admin')->first();

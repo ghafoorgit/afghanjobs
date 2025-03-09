@@ -1,7 +1,9 @@
 <x-layout>
     <div class="container mt-2">
-        <h2 class="mb-3">Users</h2>
-        <a href="{{ route('users.create') }}" class="btn btn-primary btn-sm mb-3">Create User</a>
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2 class="mb-0">Users</h2>
+            <a href="{{ route('users.create') }}" class="btn btn-primary btn-sm">Create User</a>
+        </div>
         <div>
             <x-session-message />
         </div>
