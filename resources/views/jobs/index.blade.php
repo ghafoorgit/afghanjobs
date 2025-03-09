@@ -49,7 +49,7 @@
             align-items: center;
         }
 
-        .post-job-button {
+        /* .post-job-button {
             background-color: #007bff;
             color: white;
             border: none;
@@ -58,7 +58,7 @@
             font-size: 16px;
             border-radius: 5px;
             cursor: pointer;
-        }
+        } */
 
         .post-job-button:hover {
             background-color: #0056b3;
@@ -98,11 +98,11 @@
     </div>
 
     <!-- Jobs Section -->
-    <div class="container mt-3 rounded" style="background-color: #f0f0f0;">
+    <div class="container mt-3 rounded">
         <div class="header-section mb-4">
-            <h2 class="text-center mb-0">Posted Jobs</h2>
+            <h3 class="text-center mb-0" style="margin-top:13px;">Posted Jobs</h3>
             <a href="{{ route('jobs.create') }}">
-                <button class="post-job-button">Post Job</button>
+                <button class="btn btn-sm" style="background-color: #2973B2; color:white; margin-top:13px;">Post Job</button>
             </a>
         </div>
 
