@@ -47,6 +47,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin-bottom: 20px;
         }
 
         .post-job-button:hover {
@@ -59,7 +60,6 @@
             gap: 10px;
         }
 
-
         .action-buttons button:hover {
             opacity: 0.8;
         }
@@ -71,10 +71,10 @@
 
     <!-- Jobs Section -->
     <div class="container mt-3 rounded">
-        <div class="header-section mb-4">
+        <div class="header-section">
             <h3 class="text-center mb-0" style="margin-top:13px;">Posted Jobs</h3>
             <a href="{{ route('jobs.create') }}">
-                <button class="btn btn-sm" style="background-color: #2973B2; color:white; margin-top:13px;">Post Job</button>
+                <button class="btn btn-sm post-job-button" style="background-color: #2973B2; color:white;">Post Job</button>
             </a>
         </div>
 
