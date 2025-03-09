@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Role;
-use App\Models\Permission;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class RoleController extends Controller
 {
     public function index()
     {
-        $roles = Role::with('permissions')->get(); // Eager load permissions
+        $roles = Role::all(); // Eager load permissions
         return view('users.roles.index', compact('roles'));
     }
 
@@ -25,13 +25,13 @@ class RoleController extends Controller
         $request->validate([
             'name' => 'required|unique:roles',
             'permissions' => 'array', // Ensure permissions input is an array
-            'permissions.*' => 'exists:permissions,id' // Validate each permission ID exists
+            // 'permissions.*' => 'exists:permissions,id'
         ]);
 
         $role = Role::create(['name' => $request->name]);
 
         if ($request->has('permissions')) {
-            $role->permissions()->sync($request->permissions); // Assign permissions
+            $role->syncPermissions($request->permissions); // Assign permissions
         }
 
         return redirect()->route('roles.index')->with('message', 'Role created successfully');
@@ -40,9 +40,7 @@ class RoleController extends Controller
     public function edit(Role $role)
     {
         $permissions = Permission::all(); // Get all permissions
-        $rolePermissions = $role->permissions->pluck('id')->toArray(); // Get assigned permissions
-
-        return view('users.roles.edit', compact('role', 'permissions', 'rolePermissions'));
+        return view('users.roles.edit', compact('role', 'permissions'));
     }
 
     public function update(Request $request, Role $role)
@@ -50,23 +48,19 @@ class RoleController extends Controller
         $request->validate([
             'name' => 'required|unique:roles,name,' . $role->id,
             'permissions' => 'array',
-            'permissions.*' => 'exists:permissions,id'
+            // 'permissions.*' => 'exists:permissions,id'
         ]);
 
         $role->update(['name' => $request->name]);
+        $role->syncPermissions($request->permissions);
 
-        if ($request->has('permissions')) {
-            $role->permissions()->sync($request->permissions); // Update permissions
-        } else {
-            $role->permissions()->detach(); // Remove all permissions if none selected
-        }
 
         return redirect()->route('roles.index')->with('message', 'Role updated successfully');
     }
 
     public function destroy(Role $role)
     {
-        $role->permissions()->detach(); // Remove associated permissions before deleting
+        
         $role->delete();
 
         return redirect()->route('roles.index')->with('message', 'Role deleted successfully');
