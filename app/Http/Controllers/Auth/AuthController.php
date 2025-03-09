@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
+
+    
     public function login(){
         return view('users.auth.login');
     }
@@ -25,7 +27,7 @@ class AuthController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->route('home')->with('message', 'You are logged in and can post jobs');
+        return redirect()->route('jobs.index')->with('message', 'You are logged in and can post jobs');
     }
 
     public function logout(Request $request)

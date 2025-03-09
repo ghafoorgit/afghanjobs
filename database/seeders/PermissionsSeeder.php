@@ -16,9 +16,10 @@ class PermissionsSeeder extends Seeder
         DB::table('permissions')->insert([
             ['name' => 'post_job' , 'created_at'=>now(), 'updated_at'=>now()],
             ['name' => 'edit_job' , 'created_at'=>now(), 'updated_at'=>now()],
+            ['name' => 'show_job' , 'created_at'=>now(), 'updated_at'=>now()],
             ['name' => 'delete_job' , 'created_at'=>now(), 'updated_at'=>now()],
             ['name' => 'add_user' , 'created_at'=>now(), 'updated_at'=>now()],
-            ['name' => 'appvoce_job' , 'created_at'=>now(), 'updated_at'=>now()],
+            ['name' => 'approve_job' , 'created_at'=>now(), 'updated_at'=>now()],
             ['name' => 'reject_job' , 'created_at'=>now(), 'updated_at'=>now()],
         ]);
     }

@@ -18,7 +18,7 @@ Route::resource('roles', RoleController::class);
 Route::resource('users', UserController::class);
 
 // user authentication
-Route::get('/login', [AuthController::class, 'login'])->name('login');
+Route::get('/login', [AuthController::class, 'login'])->name('login')->middleware('guest');
 Route::post('/login', [AuthController::class, 'authenticateUser'])->name('authenticateUser');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
