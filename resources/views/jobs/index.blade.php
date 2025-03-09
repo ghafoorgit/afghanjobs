@@ -58,10 +58,21 @@
         .action-buttons {
             display: flex;
             gap: 10px;
+            width: 100%;
         }
 
         .action-buttons button:hover {
             opacity: 0.8;
+        }
+
+        /* Align all buttons on one line */
+        .action-buttons .btn {
+            margin-right: 10px;
+        }
+
+        /* Styling to align approve/reject buttons to the right */
+        .action-buttons .approve-reject-buttons {
+            margin-left: auto; /* Push the approve/reject buttons to the right */
         }
     </style>
 
@@ -110,6 +121,12 @@
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                                     </form>
+
+                                    <!-- Approve/Reject Buttons -->
+                                    <div class="approve-reject-buttons">
+                                        <button class="btn btn-success btn-sm">Approve</button>
+                                        <button class="btn btn-danger btn-sm">Reject</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
