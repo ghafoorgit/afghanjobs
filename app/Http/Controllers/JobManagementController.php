@@ -61,6 +61,15 @@ class JobManagementController extends Controller
 
         $data = $request->except('job_location', 'logo');
 
+        // Convert bullet-pointed text into an array and store as JSON
+        $data['duties_responsibilities'] = $request->has('duties_responsibilities')
+            ? json_encode(array_map('trim', explode("\n", $request->duties_responsibilities)))
+            : null;
+
+        $data['job_requirements'] = $request->has('job_requirements')
+            ? json_encode(array_map('trim', explode("\n", $request->job_requirements)))
+            : null;
+
         if ($request->hasFile('logo')) {
             $data['logo'] = $request->file('logo')->store('logos', 'public');
         }
@@ -72,16 +81,22 @@ class JobManagementController extends Controller
     }
 
 
-
-
-
-    /**
-     * Display the specified job.
-     */
     public function show(Job $job)
     {
+        // Ensure JSON fields are properly decoded
+        $job->duties_responsibilities = is_string($job->duties_responsibilities)
+            ? array_map('trim', json_decode($job->duties_responsibilities, true) ?? [])
+            : [];
+
+        $job->job_requirements = is_string($job->job_requirements)
+            ? array_map('trim', json_decode($job->job_requirements, true) ?? [])
+            : [];
+
         return view('jobs.show', compact('job'));
     }
+
+
+
 
     public function edit(Job $job)
     {

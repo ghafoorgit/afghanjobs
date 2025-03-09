@@ -1,94 +1,142 @@
 <x-layout>
-    <div class="container mt-3">
-        <h2 class="mb-3"><strong>Job Details: {{ $job->job_title }}</strong></h2>
+    <div class="container mt-3" style="background-color: #f0f0f0;">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <div class="card shadow-lg">
+                    <div class="card-body text-center">
+                        @if ($job->logo)
+                            <div class="d-flex justify-content-center mb-3">
+                                <img src="{{ asset('storage/'.$job->logo) }}" alt="Company Logo" width="120" height="120" class="rounded-circle shadow">
+                            </div>
+                        @endif
 
-        <div class="row">
-            <!-- First Column with sections -->
-            <div class="col-md-6">
-                <div class="mb-3">
-                    <h5><strong>About Company</strong></h5>
-                    <p>{{ $job->about_company }}</p>
-                </div>
+                        <h2 class="mb-4"><strong>{{ $job->job_title }}</strong></h2>
 
-                <div class="mb-3">
-                    <h5><strong>Job Summary</strong></h5>
-                    <p>{{ $job->job_summary }}</p>
-                </div>
+                        <div class="row text-start">
+                            <!-- Second Column (Job Details Table) - Should appear first on smaller screens -->
+                            <div class="col-md-5 order-1 order-md-2">
+                                <table class="table table-bordered">
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">Company Name:</th>
+                                            <td>{{ $job->company_name ?? 'N/A' }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Education:</th>
+                                            <td>{{ $job->education ?? 'N/A' }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Job Location:</th>
+                                            <td>
+                                                @if ($job->provinces->isNotEmpty())
+                                                    @foreach ($job->provinces as $location)
+                                                        {{ $location->name }}@if(!$loop->last), @endif
+                                                    @endforeach
+                                                @else
+                                                    N/A
+                                                @endif
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Work Duration:</th>
+                                            <td>{{ $job->workDuration->name ?? 'N/A' }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Gender:</th>
+                                            <td>{{ $job->gender->name ?? 'N/A' }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Post Date:</th>
+                                            <td>{{ $job->post_date ? \Carbon\Carbon::parse($job->post_date)->format('d M, Y') : 'N/A' }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Closing Date:</th>
+                                            <td>{{ $job->closing_date ? \Carbon\Carbon::parse($job->closing_date)->format('d M, Y') : 'N/A' }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Reference Number:</th>
+                                            <td>{{ $job->reference_number ?? 'N/A' }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Number of Vacancies:</th>
+                                            <td>{{ $job->number_of_vacancies ?? 'N/A' }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Salary Range:</th>
+                                            <td>{{ $job->salary_range ?? 'N/A' }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Years of Experience:</th>
+                                            <td>{{ $job->years_of_experience ?? 'N/A' }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Probationary Period:</th>
+                                            <td>{{ $job->probationary_period ?? 'N/A' }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Contract Type:</th>
+                                            <td>{{ $job->contractType->name ?? 'N/A' }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Submission Email:</th>
+                                            <td>{{ $job->submission_email ?? 'N/A' }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
 
-                <div class="mb-3">
-                    <h5><strong>Duties & Responsibilities</strong></h5>
-                    <p>{{ $job->duties_responsibilities }}</p>
-                </div>
+                            <!-- First Column (Job Description & Requirements) - Should appear second on smaller screens -->
+                            <div class="col-md-7 px-4 order-2 order-md-1">
+                                <h5><strong>About Company</strong></h5>
+                                <p>{{ $job->about_company ?? 'N/A' }}</p>
 
-                <div class="mb-3">
-                    <h5><strong>Job Requirements</strong></h5>
-                    <p>{{ $job->job_requirements }}</p>
-                </div>
+                                <h5><strong>Job Summary</strong></h5>
+                                <p>{{ $job->job_summary ?? 'N/A' }}</p>
 
-                <div class="mb-3">
-                    <h5><strong>Submission Guideline</strong></h5>
-                    <p>{{ $job->submission_guideline }}</p>
-                </div>
-            </div>
+                                <h5><strong>Duties & Responsibilities</strong></h5>
+                                @if (!empty($job->duties_responsibilities))
+                                    <ul>
+                                        @foreach ($job->duties_responsibilities as $duty)
+                                            <li>{{ ltrim($duty, '• ') }}</li>
+                                        @endforeach
+                                    </ul>
+                                @else
+                                    <p>N/A</p>
+                                @endif
 
-            <!-- Second Column with other attributes -->
-            <div class="col-md-6">
-                <div class="mb-3">
-                    <strong>Company Name:</strong> {{ $job->company_name }}
-                </div>
-                <div class="mb-3">
-                    <strong>Education:</strong> {{ $job->education }}
-                </div>
-                <div class="mb-3">
-                    <strong>Job Location:</strong>
-                    @foreach($job->provinces as $location)
-                        {{ $location->name }} @if(!$loop->last), @endif
-                    @endforeach
-                </div>
-                <div class="mb-3">
-                    <strong>Work Duration:</strong> {{ $job->workDuration->name }}
-                </div>
-                <div class="mb-3">
-                    <strong>Gender:</strong> {{ $job->gender->name }}
-                </div>
-                <div class="mb-3">
-                    <strong>Post Date:</strong> {{ \Carbon\Carbon::parse($job->post_date)->format('d M, Y') }}
-                </div>
-                <div class="mb-3">
-                    <strong>Closing Date:</strong> {{ \Carbon\Carbon::parse($job->closing_date)->format('d M, Y') }}
-                </div>
-                <div class="mb-3">
-                    <strong>Reference Number:</strong> {{ $job->reference_number }}
-                </div>
-                <div class="mb-3">
-                    <strong>Number of Vacancies:</strong> {{ $job->number_of_vacancies }}
-                </div>
-                <div class="mb-3">
-                    <strong>Salary Range:</strong> {{ $job->salary_range }}
-                </div>
-                <div class="mb-3">
-                    <strong>Years of Experience:</strong> {{ $job->years_of_experience }}
-                </div>
-                <div class="mb-3">
-                    <strong>Probationary Period:</strong> {{ $job->probationary_period }}
-                </div>
-                <div class="mb-3">
-                    <strong>Contract Type:</strong> {{ $job->contractType->name }}
-                </div>
-                <div class="mb-3">
-                    <strong>Submission Email:</strong> {{ $job->submission_email }}
-                </div>
-                @if($job->logo)
-                    <div class="mb-3">
-                        <strong>Logo:</strong><br>
-                        <img src="{{ asset('storage/'.$job->logo)}}" alt="Job Logo" width="150">
+                                <h5><strong>Job Requirements</strong></h5>
+                                @if (!empty($job->job_requirements))
+                                    <ul>
+                                        @foreach ($job->job_requirements as $requirement)
+                                            <li>{{ ltrim($requirement, '• ') }}</li>
+                                        @endforeach
+                                    </ul>
+                                @else
+                                    <p>N/A</p>
+                                @endif
+
+                                <h5><strong>Submission Guideline</strong></h5>
+                                <p>{{ $job->submission_guideline ?? 'N/A' }}</p>
+                            </div>
+                        </div>
+
+                        <div class="mt-3">
+                            <a href="{{ route('jobs.index') }}" class="btn btn-secondary">Back to Jobs</a>
+                        </div>
                     </div>
-                @endif
+                </div>
             </div>
-        </div>
-
-        <div class="mt-3">
-            <a href="{{ route('jobs.index') }}" class="btn btn-secondary">Back to Jobs</a>
         </div>
     </div>
+
+    <!-- Custom CSS to style the table -->
+    <style>
+        table tr {
+            border-bottom: 1px solid #ddd;
+        }
+
+        table th, table td {
+            border: none;
+        }
+    </style>
 </x-layout>
