@@ -26,7 +26,6 @@ class JobManagementController extends Controller
             $jobs = Job::latest()->where('status', '0')->paginate(6);
         } else {
             $jobs = Job::latest()
-                ->where('status', '0')
                 ->where('user_id', $user->id)
                 ->paginate(6);
         }
@@ -164,5 +163,31 @@ class JobManagementController extends Controller
         }
         $job->delete();
         return redirect()->route('jobs.index')->with('message', 'The job and its logo have been deleted successfully!');
+    }
+
+    public function approve(Job $job)
+    {
+        if (!Auth::user()->can('approve jobs')) {
+            return redirect()->back()->with('error', 'Unauthorized action.');
+        }
+
+        if ($job->status == 0) {
+            $job->status = 1;
+            $job->save();
+            return redirect()->back()->with('message', 'The job has been approved and posted online.');
+        }
+        return redirect()->back()->with('message', 'The job is already approved.');
+    }
+
+    public function reject(Job $job){
+        if (!Auth::user()->can('reject jobs')) {
+            return redirect()->back()->with('error', 'Unauthorized action.');
+        }
+        if ($job->status == 0 || $job->status == 1) {
+            $job->status = 0;
+            $job->save();
+            return redirect()->back()->with('message', 'The job has been rejected please contact admin@jobs.af.');
+        }
+        return redirect()->back()->with('message', 'The job is already rejected.');
     }
 }

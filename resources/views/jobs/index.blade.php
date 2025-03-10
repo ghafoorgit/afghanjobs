@@ -125,10 +125,22 @@
                                     <!-- Approve/Reject Buttons -->
                                     @if (Auth::user()->can('approve jobs'))
                                         <div class="approve-reject-buttons">
-                                            <button class="btn btn-info btn-sm">Approve</button>
-                                            <button class="btn btn-warning btn-sm">Reject</button>
+                                            <!-- Approve Form -->
+                                            <form action="{{ route('jobs.approve', $job->id) }}" method="POST" style="display: inline;">
+                                                @csrf
+                                                @method('put')
+                                                <button type="submit" class="btn btn-info btn-sm">Approve</button>
+                                            </form>
+
+                                            <!-- Reject Form -->
+                                            <form action="{{ route('jobs.reject', $job->id) }}" method="POST" style="display: inline;">
+                                                @csrf
+                                                @method('put')
+                                                <button type="submit" class="btn btn-warning btn-sm">Reject</button>
+                                            </form>
                                         </div>
                                     @endif
+
                                 </div>
                             </div>
                         </div>
