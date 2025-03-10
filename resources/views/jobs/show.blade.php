@@ -1,9 +1,15 @@
 <x-layout>
-    <div class="container-fluid mt-3" >
+    <!-- Add the Back to Jobs button at the top left -->
+    <div class="container-fluid mt-3">
         <div class="row justify-content-center">
             <div class="col-md-10">
                 <div class="card shadow-lg">
                     <div class="card-body text-center">
+                        <!-- Top-left Back to Jobs Button -->
+                        <div class="position-absolute" style="top: 10px; left: 10px;">
+                            <a href="{{ route('jobs.index') }}" class="btn btn-secondary btn-sm">Back to Jobs</a>
+                        </div>
+
                         @if ($job->logo)
                             <div class="d-flex justify-content-center mb-3">
                                 <img src="{{ asset('storage/'.$job->logo) }}" alt="Company Logo" width="120" height="120" class="rounded-circle shadow">
@@ -121,7 +127,7 @@
                         </div>
 
                         <div class="mt-3">
-                            <a href="{{ route('jobs.index') }}" class="btn btn-secondary">Back to Jobs</a>
+                            <a href="{{ route('jobs.index') }}" class="btn btn-secondary btn-sm">Back to Jobs</a>
                         </div>
                     </div>
                 </div>
