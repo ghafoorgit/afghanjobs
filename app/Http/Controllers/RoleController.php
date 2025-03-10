@@ -8,6 +8,10 @@ use Spatie\Permission\Models\Permission;
 
 class RoleController extends Controller
 {
+
+    public function __construct(){
+        $this->middleware('auth');
+    }
     public function index()
     {
         $roles = Role::all(); // Eager load permissions
@@ -60,7 +64,7 @@ class RoleController extends Controller
 
     public function destroy(Role $role)
     {
-        
+
         $role->delete();
 
         return redirect()->route('roles.index')->with('message', 'Role deleted successfully');

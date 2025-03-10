@@ -15,6 +15,9 @@ use Illuminate\Support\Facades\Storage;
 class JobManagementController extends Controller
 {
 
+    public function __construct(){
+        $this->middleware('auth')->only(['create', 'store', 'edit', 'update', 'destroy']);
+    }
     public function index()
     {
         $jobs = Job::latest()->paginate(6);
