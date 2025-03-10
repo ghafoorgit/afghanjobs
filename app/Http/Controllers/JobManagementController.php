@@ -20,7 +20,6 @@ class JobManagementController extends Controller
         $jobs = Job::latest()->paginate(6);
         return view('jobs.index', compact('jobs'));
     }
-
     public function create()
     {
         $contractTypes = ContractType::all();
@@ -30,9 +29,6 @@ class JobManagementController extends Controller
         return view('jobs.create', compact('contractTypes', 'workDurations','provinces', 'genders'));
     }
 
-    /**
-     * Store a newly created job.
-     */
     public function store(Request $request)
     {
         $request->validate([
@@ -79,26 +75,19 @@ class JobManagementController extends Controller
 
         return redirect()->route('jobs.index')->with('message', 'Job created successfully!');
     }
-
-
     public function show(Job $job)
-{
-    // If the duties_responsibilities and job_requirements are not JSON but rather a string with bullet points
-    $job->duties_responsibilities = !empty($job->duties_responsibilities)
-        ? explode('•', $job->duties_responsibilities)
-        : [];
+    {
+        // If the duties_responsibilities and job_requirements are not JSON but rather a string with bullet points
+        $job->duties_responsibilities = !empty($job->duties_responsibilities)
+            ? explode('•', $job->duties_responsibilities)
+            : [];
 
-    $job->job_requirements = !empty($job->job_requirements)
-        ? explode('•', $job->job_requirements)
-        : [];
+        $job->job_requirements = !empty($job->job_requirements)
+            ? explode('•', $job->job_requirements)
+            : [];
 
-    return view('jobs.show', compact('job'));
-}
-
-
-
-
-
+        return view('jobs.show', compact('job'));
+    }
     public function edit(Job $job)
     {
         $contractTypes = ContractType::all();
@@ -110,9 +99,6 @@ class JobManagementController extends Controller
         return view('jobs.edit', compact('job', 'contractTypes', 'workDurations', 'provinces', 'genders'));
     }
 
-    /**
-     * Update the job.
-     */
     public function update(Request $request, Job $job)
     {
         // Validate the incoming request
@@ -139,11 +125,7 @@ class JobManagementController extends Controller
             'submission_email' => 'nullable|email|max:255',
             'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
-
-        // Prepare the data to update
         $data = $request->except('job_location', 'logo');
-
-        // Handle the logo upload if it's provided
         if ($request->hasFile('logo')) {
             // Delete the old logo if it exists
             if ($job->logo) {
@@ -151,43 +133,20 @@ class JobManagementController extends Controller
             }
             $data['logo'] = $request->file('logo')->store('logos', 'public');
         }
-
-        // Update the job record
         $job->update($data);
-
-        // Sync the provinces (job locations) selected
         $job->provinces()->sync($request->job_location);
-
         return redirect()->route('jobs.index')->with('message', 'Job updated successfully!');
     }
 
-
-
-    /**
-     * Remove the job.
-     */
-
-
-
-
      public function destroy(Job $job)
     {
-        // Check if the job has a logo
         if ($job->logo) {
-            // Use the path from $job->logo directly
             $logoPath = $job->logo;
-
-            // Check if the logo exists in storage before attempting to delete
             if (Storage::exists($logoPath)) {
-                // Delete the logo file from local storage (storage/app/public/logos)
                 Storage::delete($logoPath);
             }
         }
-
-        // Delete the job from the database
         $job->delete();
-
-        // Redirect with a success message
         return redirect()->route('jobs.index')->with('message', 'The job and its logo have been deleted successfully!');
     }
 }
