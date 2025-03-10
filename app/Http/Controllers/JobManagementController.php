@@ -10,6 +10,7 @@ use App\Models\WorkDuration;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class JobManagementController extends Controller
@@ -20,9 +21,18 @@ class JobManagementController extends Controller
     }
     public function index()
     {
-        $jobs = Job::latest()->paginate(6);
+        $user = Auth::user();
+        if ($user->hasRole('admin')) {
+            $jobs = Job::latest()->where('status', '0')->paginate(6);
+        } else {
+            $jobs = Job::latest()
+                ->where('status', '0')
+                ->where('user_id', $user->id)
+                ->paginate(6);
+        }
         return view('jobs.index', compact('jobs'));
     }
+
     public function create()
     {
         $contractTypes = ContractType::all();

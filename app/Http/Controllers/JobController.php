@@ -13,7 +13,7 @@ class JobController extends Controller
 
     public function index()
     {
-        $jobs = Job::latest()->paginate(6);
+        $jobs = Job::latest()->where('status','1')->paginate(6);
         return view('home', compact('jobs'));
     }
 }
