@@ -125,22 +125,38 @@
                                     <!-- Approve/Reject Buttons -->
                                     @if (Auth::user()->can('approve jobs'))
                                         <div class="approve-reject-buttons">
-                                            <!-- Approve Form -->
-                                            <form action="{{ route('jobs.approve', $job->id) }}" method="POST" style="display: inline;">
-                                                @csrf
-                                                @method('put')
-                                                <button type="submit" class="btn btn-info btn-sm">Approve</button>
-                                            </form>
+                                            @if ($job->status == 1)
+                                                <!-- Approved (Disable the Approve button and keep Reject enabled) -->
+                                                <form action="{{ route('jobs.reject', $job->id) }}" method="POST" style="display: inline;">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <button type="submit" class="btn btn-warning btn-sm">Reject</button>
+                                                </form>
+                                                <button class="btn btn-success btn-sm" disabled>Approved</button>
+                                            @elseif ($job->status == 2)
+                                                <!-- Rejected (Disable the Reject button and keep Approve enabled) -->
+                                                <form action="{{ route('jobs.approve', $job->id) }}" method="POST" style="display: inline;">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <button type="submit" class="btn btn-info btn-sm">Approve</button>
+                                                </form>
+                                                <button class="btn btn-danger btn-sm" disabled>Rejected</button>
+                                            @else
+                                                <!-- Both buttons enabled (if job is pending) -->
+                                                <form action="{{ route('jobs.approve', $job->id) }}" method="POST" style="display: inline;">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <button type="submit" class="btn btn-info btn-sm">Approve</button>
+                                                </form>
 
-                                            <!-- Reject Form -->
-                                            <form action="{{ route('jobs.reject', $job->id) }}" method="POST" style="display: inline;">
-                                                @csrf
-                                                @method('put')
-                                                <button type="submit" class="btn btn-warning btn-sm">Reject</button>
-                                            </form>
+                                                <form action="{{ route('jobs.reject', $job->id) }}" method="POST" style="display: inline;">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <button type="submit" class="btn btn-warning btn-sm">Reject</button>
+                                                </form>
+                                            @endif
                                         </div>
                                     @endif
-
                                 </div>
                             </div>
                         </div>

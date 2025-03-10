@@ -23,7 +23,7 @@ class JobManagementController extends Controller
     {
         $user = Auth::user();
         if ($user->hasRole('admin')) {
-            $jobs = Job::latest()->where('status', '0')->paginate(6);
+            $jobs = Job::latest()->paginate(6);
         } else {
             $jobs = Job::latest()
                 ->where('user_id', $user->id)
