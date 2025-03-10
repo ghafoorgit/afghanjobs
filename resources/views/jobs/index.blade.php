@@ -123,10 +123,12 @@
                                     </form>
 
                                     <!-- Approve/Reject Buttons -->
-                                    <div class="approve-reject-buttons">
-                                        <button class="btn btn-info btn-sm">Approve</button>
-                                        <button class="btn btn-warning btn-sm">Reject</button>
-                                    </div>
+                                    @if (Auth::user()->can('approve jobs'))
+                                        <div class="approve-reject-buttons">
+                                            <button class="btn btn-info btn-sm">Approve</button>
+                                            <button class="btn btn-warning btn-sm">Reject</button>
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>

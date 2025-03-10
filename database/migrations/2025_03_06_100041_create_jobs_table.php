@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('jobs', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->string('job_title');
             $table->string('company_name');
             $table->string('education');
@@ -33,6 +34,7 @@ return new class extends Migration
             $table->text('submission_guideline');
             $table->string('submission_email');
             $table->string('logo')->nullable();
+            $table->tinyInteger('status')->default(0);
             $table->timestamps();
         });
     }
