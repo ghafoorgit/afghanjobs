@@ -157,6 +157,22 @@
                                             @endif
                                         </div>
                                     @endif
+                                    @if (Auth::user()->hasRole('employer'))
+                                        <div class="approve-reject-buttons">
+                                            @if ($job->status == 1)
+                                                <!-- Approved Button (Disabled) -->
+                                                <button class="btn btn-success btn-sm" disabled>Approved</button>
+                                            @elseif ($job->status == 2)
+                                                <!-- Rejected Button (Disabled) -->
+                                                <button class="btn btn-danger btn-sm" disabled>Rejected</button>
+                                            @else
+                                                <!-- Pending Button (Disabled) -->
+                                                <button class="btn btn-warning btn-sm" disabled>Pending</button>
+                                            @endif
+                                        </div>
+                                    @endif
+
+
                                 </div>
                             </div>
                         </div>

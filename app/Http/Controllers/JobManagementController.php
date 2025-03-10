@@ -170,8 +170,8 @@ class JobManagementController extends Controller
         if (!Auth::user()->can('approve jobs')) {
             return redirect()->back()->with('error', 'Unauthorized action.');
         }
-
-        if ($job->status == 0) {
+        // return "aa";
+        if ($job->status == 0 || $job->status == 2) {
             $job->status = 1;
             $job->save();
             return redirect()->back()->with('message', 'The job has been approved and posted online.');
@@ -184,7 +184,7 @@ class JobManagementController extends Controller
             return redirect()->back()->with('error', 'Unauthorized action.');
         }
         if ($job->status == 0 || $job->status == 1) {
-            $job->status = 0;
+            $job->status = 2;
             $job->save();
             return redirect()->back()->with('message', 'The job has been rejected please contact admin@jobs.af.');
         }
