@@ -2,8 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
@@ -15,39 +17,47 @@ class RolePermissionSeeder extends Seeder
     public function run()
     {
         // Define permission names
-        $permissions = [
-            'create users',
-            'edit users',
-            'delete users',
-            'view users',
-            'create posts',
-            'edit posts',
-            'delete posts',
-            'publish posts'
+        $permissionsAdmin = [
+            'add users',
+            'create jobs',
+            'edit jobs',
+            'view jobs',
+            'delete jobs',
+            'approve jobs',
+            'reject jobs',
         ];
 
         // Create and assign permissions
-        foreach ($permissions as $permission) {
+        foreach ($permissionsAdmin as $permission) {
             Permission::firstOrCreate(['name' => $permission, 'guard_name' => 'web']);
         }
-
-        // Define roles and assign permissions
-        $admin = Role::firstOrCreate(['name' => 'admin', 'guard_name' => 'web']);
-        $editor = Role::firstOrCreate(['name' => 'editor', 'guard_name' => 'web']);
-        $user = Role::firstOrCreate(['name' => 'user', 'guard_name' => 'web']);
-
-        // Assign all permissions to admin
-        $admin->givePermissionTo(Permission::all());
-
-        // Assign specific permissions to editor
-        $editor->givePermissionTo([
-            'create posts',
-            'edit posts',
-            'delete posts',
-            'publish posts'
+        $adminRole = Role::firstOrCreate(['name' => 'admin', 'guard_name' => 'web']);
+        $adminRole->givePermissionTo(Permission::all());
+        $userAdmin = User::firstOrCreate([
+            'email' => 'admin@afghanjobs.af'
+        ], [
+            'name' => 'Admin',
+            'password' => Hash::make('Admin@Admin123'), // Hashed password
         ]);
 
-        // Assign basic permissions to user
-        $user->givePermissionTo(['view users']);
+        $userAdmin->assignRole($adminRole);
+
+        $permissionsEmployer = [
+            'create jobs',
+            'edit jobs',
+            'view jobs',
+            'delete jobs'
+        ];
+
+        $employerRole = Role::firstOrCreate(['name'=>'employer','guard_name'=>'web']);
+        $employerRole->givePermissionTo($permissionsEmployer);
+        $userEmployer = User::firstOrCreate([
+            'email' => 'employer@afghanjobs.af'
+        ], [
+            'name' => 'Employer',
+            'password' => Hash::make('Employer@Admin123'), // Hashed password
+        ]);
+        $userEmployer->assignRole($employerRole);
+
     }
 }
