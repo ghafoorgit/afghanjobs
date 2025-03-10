@@ -59,6 +59,8 @@ class JobManagementController extends Controller
         ]);
 
         $data = $request->except('job_location', 'logo');
+        $data['user_id'] = auth()->user()->id;
+        // return $data;
 
         // Convert bullet-pointed text into an array and store as JSON
         $data['duties_responsibilities'] = $request->has('duties_responsibilities')
@@ -129,6 +131,7 @@ class JobManagementController extends Controller
             'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
         $data = $request->except('job_location', 'logo');
+        $data['user_id'] = auth()->user()->id;
         if ($request->hasFile('logo')) {
             // Delete the old logo if it exists
             if ($job->logo) {

@@ -24,10 +24,11 @@ class JobSeeder extends Seeder
         if (!$contractTypeId || !$workDurationId || !$genderId || empty($provinceIds)) {
             return;
         }
-
+        // $user = auth()->user()->id;
         // Sample jobs data
         $jobs = [
             [
+                'user_id'=> 1,
                 'job_title' => 'Software Engineer',
                 'company_name' => 'Tech Solutions Ltd.',
                 'education' => 'Bachelor’s in Computer Science',
@@ -52,6 +53,7 @@ class JobSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
+                'user_id'=> 1,
                 'job_title' => 'Marketing Specialist',
                 'company_name' => 'Afghan Business Group',
                 'education' => 'Bachelor’s in Marketing or Business Administration',

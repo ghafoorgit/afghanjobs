@@ -17,12 +17,12 @@
 
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item"><a class="nav-link text-white" href="{{ url('/') }}">Jobs</a></li>
-                @if (Auth::user()->can('create jobs'))
+                @if (Auth::check() && Auth::user()->can('create jobs'))
                     <li class="nav-item"><a class="nav-link text-white" href="{{ url('/jobs') }}">Job Management</a></li>
                 @endif
                 <li class="nav-item"><a class="nav-link text-white" href="{{ url('/about') }}">About</a></li>
                 <li class="nav-item"><a class="nav-link text-white" href="{{ url('/contact-us') }}">Contact Us</a></li>
-                @if (Auth::user()->can('add users'))
+                @if (Auth::check() && Auth::user()->can('add users'))
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Access Control</a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">

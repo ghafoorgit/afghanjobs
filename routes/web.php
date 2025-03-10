@@ -30,5 +30,7 @@ Route::post('/jobs', [JobManagementController::class, 'store'])->name('jobs.stor
 Route::get('/jobs/{job}', [JobManagementController::class, 'show'])->name('jobs.show'); // Show job details
 Route::get('/jobs/{job}/edit', [JobManagementController::class, 'edit'])->name('jobs.edit')->middleware('auth'); // Show edit form
 Route::put('/jobs/{job}', [JobManagementController::class, 'update'])->name('jobs.update')->middleware('auth'); // Update job
-Route::delete('/jobs/{job}', [JobManagementController::class, 'destroy'])->name('jobs.destroy')->middleware('auth'); // Delete job
+Route::delete('/jobs/{job}', [JobManagementController::class, 'destroy'])->name('jobs.destroy')->middleware('auth');
+Route::delete('/approve/{job}', [JobManagementController::class, 'approve'])->name('jobs.approve')->middleware('auth');
+Route::delete('/reject/{job}', [JobManagementController::class, 'reject'])->name('jobs.reject')->middleware('auth');
 
